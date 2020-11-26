@@ -1,0 +1,39 @@
+<app-loader loader *ngIf="loading" ></app-loader>
+
+<div class="container">
+	<div class="col-md-8">
+		<div class="form-area">
+			<!-- {{schedulerForm.value|json}} -->
+			<form role="form" [formGroup]="schedulerForm" (ngSubmit)="addScheduler()">
+				<br style="clear:both">
+				<h3 style="margin-bottom: 25px; text-align: center;">Create Schduler</h3>
+
+				<div class="form-group">
+          <label for="user">Choose the team member</label>
+					<select class="form-control" id="user" name="user" formControlName="assigneeId" required>
+            <option *ngFor="let user of users" [value]="user.id" >
+                {{user.name}}              
+              </option>
+            </select>
+				</div>
+				<div class="form-group">
+          <label for="datep">Select the date <span>Sorry no date picker :(</span></label>
+					<input type="date" id="datep" [value]="'new Date()'" name="date" formControlName="date" required />
+				</div>
+				<div class="form-group">
+                    <label for="timep">Select the time <span>Sorry no time picker :(</span></label>
+					<input type="time" name="time" formControlName="time" required id="timep" />
+					<span class="help">Ex: 08:36:AM</span>
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" id="title" name="title" placeholder="Add Title" formControlName="title" required>
+				</div>
+				<div class="form-group">
+					<textarea class="form-control" type="textarea" id="message" name="message" placeholder="Message" maxlength="140" rows="7"
+					 formControlName="message" formControlName="description" required></textarea>
+				</div>
+				<button type="button" id="submit" name="submit" class="btn btn-primary pull-right" [disabled]="!schedulerForm.valid" (click)="addScheduler()">Create</button>
+			</form>
+		</div>
+	</div>
+</div>

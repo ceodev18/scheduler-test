@@ -1,0 +1,18 @@
+<app-loader loader *ngIf="loading"></app-loader>
+
+<div class='container-form'>
+	<div class='wrapper'>
+		<form [formGroup]='registerForm' (ngSubmit)='register()'>
+			<h3 class='form-signin-heading'>Welcome to Tesla Inc. <span>Register here</span> </h3>
+			<hr class='colorgraph'><br>
+
+			<input type='text' class='form-control' name='Username' placeholder='Username' required autofocus='' formControlName='username'
+			/>
+			<input type='password' class='form-control' name='Password' placeholder='Password' required formControlName='password' />
+
+			<input id='admin' type="checkbox" name='role' formControlName='role'><label (click)="admin()" for="admin" >I Want Become Only Admin </label><br><br>
+    <div class='infoForm' routerLink='/' >Already registered? Clicke here</div>
+			<button class='btn btn-lg btn-primary btn-block' name='Submit' value='Login' [disabled]="!registerForm.valid">Register</button>
+		</form>
+	</div>
+</div>

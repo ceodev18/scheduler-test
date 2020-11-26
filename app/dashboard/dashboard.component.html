@@ -1,0 +1,84 @@
+<app-loader loader *ngIf="loading"></app-loader>
+<div class="container">
+	<div class="mail-box">
+		<aside class="sm-side">
+			<div class="user-head">
+				<div class="user-name">
+					<h5>
+						{{user.userName}}
+					</h5>
+					<!-- <span><a [routerLink]="['']">Logout</a></span> -->
+					<span><a [routerLink]="['']" (click)='logout()'>Logout</a></span>
+				</div>
+			</div>
+			<div class="inbox-body">
+				<a title="Compose" class="btn btn-compose" (click)="getSchedulerForm()" >Create Scheduler</a>
+			</div>
+			<ul class="event-list">
+				<li *ngFor="let schedule of schedules; let i = index" (click)="openScheduler(schedule.id)">
+					<time>
+						<span class="day">{{day[i]}}</span>
+						<span class="month">{{month[i]}}</span>
+					</time>
+					<div class="info">
+						<h2 class="title">{{schedule.title}}</h2>
+						<p class="time">{{schedule.time}}</p>
+						<span class="status" [ngStyle]="{'background-color':
+          schedule.accepted ? '#198ef9' : '#ec2b44'}" title="{{schedule.accepted ? 'Accepted' : 'Not Yet Accepted'}}"></span>
+					</div>
+				</li>
+			</ul>
+
+		</aside>
+		<aside class="lg-side">
+			<div class="inbox-head">
+				<h3>Scheduler Details</h3>
+				<form action="#" class="pull-right position">
+					<div class="input-append">
+						<input type="text" class="sr-input" placeholder="Search ..!">
+						<button class="btn sr-btn" type="button">Go</button>
+					</div>
+				</form>
+			</div>
+			<div class="inbox-body">
+				<div *ngIf="user.role ! == 1; else roleNormal">
+					<app-add-scheduler *ngIf="sVisible"></app-add-scheduler>
+					<div class="placeholder">
+						Hi <span>{{user.userName}}</span> You are the ADMIN. You can create Appoinment by usng "<b>Create Scheduler</b>" button
+						on your right side .
+					</div>
+				</div>
+				<ng-template #roleNormal>
+					<div class="placeholder" *ngIf="!schedule">
+						Hi <span>{{user.userName}}</span> Welcome back,  <br>Click the navigation to get appoinment details.
+					</div>
+					<div class="mail-option" *ngIf="schedule">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="offer offer-success" [ngStyle]="{'border-color': schedule.color}">
+									<div class="shape">
+										<div class="shape-text">{{schedule.time}}</div>
+									</div>
+									<div class="offer-content">
+										<h3 class="lead" [ngStyle]="{'color': schedule.color}">
+											{{schedule.title}}
+										</h3>
+										<p class="desc">
+											{{schedule.description}}
+										</p>
+										<p><b>Date: </b>{{schedule.date}}</p>
+										<p><b>Time: </b>{{schedule.time}}</p>
+										<div [ngClass]="!schedule.accepted ?  'button accept' : 'button notAccept'" (click)="accept(schedule.id, $event)">
+											{{!schedule.accepted ? 'Accpet' : 'Accepted'}}
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</ng-template>
+			</div>
+		</aside>
+	</div>
+</div>

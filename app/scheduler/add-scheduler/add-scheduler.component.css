@@ -1,0 +1,36 @@
+
+.red{
+    color:red;
+    }
+.form-area{
+    background-color: rgba(0, 0, 0, 0.78);
+    padding: 10px 40px 60px;
+    border: 1px solid GREY;
+    text-align: center;
+	}
+.form-area form select, .form-area form option{
+  text-transform: capitalize;
+}
+.form-area form input[type=date], .form-area form input[type=time]{
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  color: rgb(116, 116, 116);
+}
+.help{
+  font-size: 13px;
+  float: left;
+  margin: 1px 0 10px 0;
+  color: rgb(181, 181, 181);
+}
+label{
+    color: rgb(192, 187, 187);
+    font-size: 12px;
+    text-align: left;
+    display: inherit;
+    font-weight: normal;
+}
+label > span{
+    color: rgb(119, 108, 108);
+    font-size: 9px;
+}
